@@ -1,2 +1,6 @@
 normally a db then collection created and then documents are inserted.
 but in website we should define first the Schema and then feed and fetch data from it
+
+mongodb pass
+
+3yrbWNk2TSjhW9Gn
