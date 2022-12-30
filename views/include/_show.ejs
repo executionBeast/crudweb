@@ -1,17 +1,22 @@
+<% users.forEach((user,index)=>{  %>
+
 <tr>
-    <td>1</td>
-    <td>username</td>
-    <td>ex@emil.com</td>
-    <td>male</td>
-    <td>active</td>
+    <td><%= index+1 %></td>
+    <td><%=user.name %></td>
+    <td><%=user.email %></td>
+    <td><%=user.gender %></td>
+    <td><%=user.status %></td>
     <td>
-        <a href="/update-user" class="btn border-shadow update">
-            <span class="text-gradient"> <i class="fas fa-pencil-alt">edit</i> </span>
+        <a href="/update-user?id=<%=user._id%>" class="btn border-shadow update">  <!--update-user ke saath ?id=<id> as params jaayega to taaki is id ko req.query.id se pakad ke axios request kar sake for one user-->
+            <span class="text-gradient"> <i class="fas fa-pencil-alt"></i> </span>
         </a>
 
-        <a href="#" class="btn border-shadow delete">   
-            <span class="text-gradient"><i class="fas fa-times">delete </i> </span>
+        <a  class="btn border-shadow delete"  data-id="<%=user._id%>">   
+            <span class="text-gradient"><i class="fas fa-times"> </i> </span>
         </a>
 
     </td>
  </tr>
+
+
+ <% }) %>

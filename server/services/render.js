@@ -1,16 +1,33 @@
+const axios = require("axios");
+const { response } = require("express");
+
+
+
 exports.homeRoute = (req,res) => {
-    res.render('index');
+    axios.get('http://localhost:8000/api/users')
+    .then(response=>{
+        res.render('index',{users:response.data});
+    })
+    .catch(err=>{
+        res.send(err);
+    })
+
 }
 
 
-exports.add_user = (req,res)=>{  //add user page
-    res.render('add_user')
-}
-
+exports.add_user = (req,res)=>{  //add user working,using form POST method at '/api/users'
+    res.render('add_user')   //add user page
+}   
 
 
 exports.update_user = (req,res)=>{
-    res.render('update_user')
+    axios.get('http://localhost:8000/api/users',{params:{id:req.query.id}})  //params provided to get that one user kaa data
+        .then(userdata=>{     //userdata is a response promise returned by axios.get
+            res.render('update_user',{data:userdata.data}) //data -> that one user ka data
+        })
+        
+    
 }
 
 
+ 

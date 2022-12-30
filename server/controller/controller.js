@@ -16,10 +16,11 @@ exports.create = (req,res)=>{                       //working
     user
         .save(user)
         .then(data=>{
-            res.send(data)
+            // res.send(data)
+            res.redirect('/add_user')
         })  //if this promise return error then catch
         .catch(err=>{
-            res.status(500).send({message:err.message||"Some Error Occurred!"})
+            res.status(500).send({errmessage:err.message||"Some Error Occurred!"})
         })
 
 
@@ -33,14 +34,24 @@ exports.find = (req,res)=>{                   //working
         });
         return;
         }
-    
-    Userdb.find()  
+    const id=req.query.id
+    if(!id){
+        Userdb.find()  
             .then(data=>{
                 res.send(data)
             })
             .catch(err =>{
-                res.status(500).send({message:"Some Error occurred"})
+                res.status(500).send({errmessage:"Some Error occurred"})
             })
+    }else{
+        Userdb.findById(id)
+            .then(data=>{
+                res.send(data)
+            })
+            .catch(err=>{
+                res.status(500).send({errmessage:err||"Some Error occurred finding!"})
+            })
+    }
 
 }
 
@@ -52,14 +63,14 @@ exports.update = (req,res)=>{                              //working
         return;
         }
     
-    const id = req.params.id;
+    const id = req.params.id;  //from url 'api/users/:id'
     Userdb.findByIdAndUpdate(id,req.body,{useFindAndModify:true,new:true})
         .then(data=>{
             // console.log(req.body)
             res.send(data)
         })
         .catch(err =>{
-            res.status(500).send({message:err || "Some Error occurred updating!"})
+            res.status(500).send({errmessage:err || "Some Error occurred updating!"})
         })
 }
 
@@ -78,6 +89,6 @@ exports.delete = (req,res)=>{                              //working
         })
 
         .catch(err=>{
-            res.status(400).send({message:err || "Some Error occurred deleting!"})
+            res.status(400).send({errmessage:err || "Some Error occurred deleting!"})
         })
 }

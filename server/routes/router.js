@@ -3,7 +3,7 @@ const route = express.Router()
 const services = require('../services/render')   //imported RENDER.JS file as services
 const controller = require('../controller/controller');
 
-route.get('/', services.homeRoute);
+route.get('/', services.homeRoute);  //services = render
 
 route.get('/add_user',services.add_user);
 
@@ -13,9 +13,9 @@ route.get('/update-user',services.update_user);
 
 //api routes 
 route.post('/api/users',controller.create); //working data creation 
-route.get('/api/users',controller.find);  //working fetch all users data
-route.put('/api/users/:id',controller.update);  //
-route.delete('/api/users/:id',controller.delete);
+route.get('/api/users/',controller.find);  //working fetch all users data
+route.put('/api/users/:id',controller.update);  // '/api/users/${id}'
+route.delete('/api/users/:id',controller.delete);    
 
 //ager api route pe delete req aayi to contro.delete fn ko run  karo
 

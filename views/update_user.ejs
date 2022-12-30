@@ -1,5 +1,5 @@
 <%-include('include/_header') %>
-
+ <!-- <%=data._id%><%=data.name%><%=data.email%><%=data.gender%> <%=data.status%> -->
 <!-- MAIN -->
 <main id="site-main">
     <div class="container">
@@ -13,29 +13,30 @@
         <div class="form-group">
             <br>
             <h2>Update User</h2>
-            <form action = "/list-data" method="POST">
-            
+            <form method="POST" id="update_user">  <!--send data on /api/users/:id-->
+                
+                <input type="hidden" name="id" value="<%=data._id%>">
                 <label for="name" id="name-in">Name:</label> <br>
-                <input type="text" name="name" id="name" placeholder="Enter Name"> <br> <br>
+                <input type="text" value="<%=data.name%>"name="name" id="name" placeholder="Enter Name"> <br> <br>
             
                 <label for="name" id="email-in">Email:</label> <br>
-                <input type="text" name="email" id="email" placeholder="Enter Email"> <br><br>
+                <input type="text" value="<%=data.email%>" name="email" id="email" placeholder="Enter Email"> <br><br>
             
                 <label>Gender</label>
-                <input type="radio" name="gender" value="Male">
+                <input type="radio" name="gender" value="Male" <%=data.gender == 'Male' ? 'checked':''%> >
                 <lable for="gender" >Male</lable>
-                <input type="radio" name="gender" value="Female">
+                <input type="radio" name="gender" value="Female" <%=data.gender =='Female'?'checked':'' %>>
                 <lable for="gender" >Female</lable> <br> <br>
             
                 <label>Status</label>
-                <input type="radio" name="status" value="Active">
+                <input type="radio" name="status" value="Active" <%=data.status=='Active'?'checked':'' %>>
                 <lable for="status" >Active</lable>
-                <input type="radio" name="status" value="Inactive">
+                <input type="radio" name="status" value="Inactive" <%=data.status=='Inactive'?'checked':'' %>>
                 <lable for="status" >Inactive</lable> <br><br>
             
                 <!-- <input type="submit" id="submit-btn"> -->
         
-                <button type="button" id="submit-btn">Update</button>
+                <button type="submit" id="submit-btn">Update</button>
                 
             </form>
             </div>    
